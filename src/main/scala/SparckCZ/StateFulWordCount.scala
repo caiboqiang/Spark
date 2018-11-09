@@ -1,0 +1,21 @@
+package SparckCZ
+
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.{SparkContext, SparkConf}
+
+/**
+ * Created by Administrator on 2017/8/9.
+ */
+object StateFulWordCount {
+  def main(args: Array[String]) {
+    val conf = new SparkConf().setAppName("StreamingWordCount").setMaster("local[2]")
+    val sc = new SparkContext(conf)
+    val ssc = new StreamingContext(sc, Seconds(5))
+    //接收数据
+    val ds = ssc.socketTextStream("192.168.1.108",8888)
+    //DStream是一个特殊的RDD
+    //hello tom hello jerry
+  //  val result = ds.flatMap(_.split(" ")).map((_, 1)).updateStateByKey()
+  }
+
+}
